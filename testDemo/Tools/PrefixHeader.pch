@@ -1,0 +1,58 @@
+//
+//  PrefixHeader.pch
+//  testDemo
+//
+//  Created by ShiPanpan on 2018/4/26.
+//  Copyright © 2018年 ShiPanpan. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#pragma mark ------------   1像素说明及定义    ------------
+/*
+ a、1Point的线在非Retina屏幕则是一个像素，在Retina屏幕上则可能是2个像素（非6plus）或者3个像素（6plus），取决于系统设备的DPI。
+ 
+ b、所以在非6plus屏幕上1像素我们需要当成 1.0/2 = 0.5 来处理。系统绘制的时候再乘上[UIScreen mainScreen].scale得到像素数去绘制。
+ 
+ c、6plus上则需要1.0/3来处理。如果继续用0.5系统绘制时会有0.5像素的问题，系统会采用“antialiasing(反锯齿)”的技术处理，（详见http://www.cnblogs.com/smileEvday/p/iOS_PixelVsPoint.html）。所以6plus上0.5的线宽（即1.5像素）有时候是1像素有时候是2像素，取决于origin.y的不同。
+ 
+ d、因此，有这样的宏。使用时，将所有0.5的替换成KSINGLELINE_WIDTH即可。
+ */
+#define KSINGLELINE_WIDTH  1.0f/([UIScreen mainScreen].scale)//1像素线宽的宏。
+
+#pragma mark ------------   屏幕尺寸使用  ------------
+/*
+ 取得屏幕可用宽度及高度尺寸,以size类型返回
+ */
+#define KSCREENSIZE         ([UIScreen mainScreen].applicationFrame.size)  //屏幕可用尺寸
+
+/*
+ 取得屏幕可用宽度尺寸
+ */
+#define KSCREEN_WIDTH       ([UIScreen mainScreen].applicationFrame.size.width)//屏幕可用宽度
+
+/*
+ 取得屏幕可用高度尺寸
+ */
+#define KSCREEN_HEIGHT      ([UIScreen mainScreen].applicationFrame.size.height)//屏幕可用高度
+
+#pragma mark ------------   导航栏高度宏  ------------
+/*
+ 导航栏高度宏--->44
+ */
+#define KNAV_HEIGHT  44
+
+#pragma mark ------------   底部TAB高度宏  ------------
+/*
+ 底部TAB高度宏--->49;主要用于底部建工具栏或底部浮框高度
+ */
+#define KMAINTAB_HEIGHT 49
+
+
+
+
+#endif /* PrefixHeader_pch */
