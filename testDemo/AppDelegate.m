@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "SPButtonViewController.h"
+#import "SPViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,14 +20,20 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    //设置导航控制器
-    SPButtonViewController *btnVC = [[SPButtonViewController alloc] init];
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:btnVC];
+    //设置根控制器为导航控制器
+//    SPButtonViewController *btnVC = [[SPButtonViewController alloc] init];
+//    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:btnVC];
+//    self.window.rootViewController = navVC;
     
-    self.window.rootViewController = navVC;
+    //设置根控制器为普通控制器
+    SPViewController *VC = [[SPViewController alloc] init];
+    self.window.rootViewController = VC;
+    
+    
     [self.window makeKeyAndVisible];
     
     

@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		810CE74D2091C8C7008F84CC /* left_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 810CE74C2091C8C7008F84CC /* left_btn.png */; };
+		81319CC720B8FE1C00EAC32F /* timg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 81319CC620B8FE1C00EAC32F /* timg.jpg */; };
+		81319CCA20B90D6700EAC32F /* SPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81319CC920B90D6700EAC32F /* SPViewController.m */; };
 		813B01C3208990C500D57FF2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 813B01C2208990C500D57FF2 /* AppDelegate.m */; };
-		813B01C6208990C500D57FF2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 813B01C5208990C500D57FF2 /* ViewController.m */; };
 		813B01C9208990C500D57FF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 813B01C7208990C500D57FF2 /* Main.storyboard */; };
 		813B01CC208990C500D57FF2 /* testDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 813B01CA208990C500D57FF2 /* testDemo.xcdatamodeld */; };
 		813B01CE208990C700D57FF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 813B01CD208990C700D57FF2 /* Assets.xcassets */; };
@@ -19,6 +20,9 @@
 		813B01E9208990C700D57FF2 /* testDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 813B01E8208990C700D57FF2 /* testDemoUITests.m */; };
 		813B01FB2089915200D57FF2 /* SPButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 813B01FA2089915200D57FF2 /* SPButtonViewController.m */; };
 		813B01FF208993C300D57FF2 /* utilityDrawViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 813B01FE208993C300D57FF2 /* utilityDrawViewHelper.m */; };
+		81CA14C3209AB4DB003853B5 /* pause_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 81CA14C2209AB4DB003853B5 /* pause_btn.png */; };
+		81F0C95320A3D896001986C7 /* SPBlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F0C95220A3D896001986C7 /* SPBlockViewController.m */; };
+		81F0C95620A3DD1D001986C7 /* SPTwoBlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F0C95520A3DD1D001986C7 /* SPTwoBlockViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,11 +45,12 @@
 /* Begin PBXFileReference section */
 		810CE74A2091AC95008F84CC /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		810CE74C2091C8C7008F84CC /* left_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_btn.png; sourceTree = "<group>"; };
+		81319CC620B8FE1C00EAC32F /* timg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = timg.jpg; sourceTree = "<group>"; };
+		81319CC820B90D6700EAC32F /* SPViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPViewController.h; sourceTree = "<group>"; };
+		81319CC920B90D6700EAC32F /* SPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPViewController.m; sourceTree = "<group>"; };
 		813B01BE208990C500D57FF2 /* testDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		813B01C1208990C500D57FF2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		813B01C2208990C500D57FF2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		813B01C4208990C500D57FF2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		813B01C5208990C500D57FF2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		813B01C8208990C500D57FF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		813B01CB208990C500D57FF2 /* testDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = testDemo.xcdatamodel; sourceTree = "<group>"; };
 		813B01CD208990C700D57FF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,6 +67,11 @@
 		813B01FA2089915200D57FF2 /* SPButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPButtonViewController.m; sourceTree = "<group>"; };
 		813B01FD208993C300D57FF2 /* utilityDrawViewHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utilityDrawViewHelper.h; sourceTree = "<group>"; };
 		813B01FE208993C300D57FF2 /* utilityDrawViewHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = utilityDrawViewHelper.m; sourceTree = "<group>"; };
+		81CA14C2209AB4DB003853B5 /* pause_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_btn.png; sourceTree = "<group>"; };
+		81F0C95120A3D896001986C7 /* SPBlockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPBlockViewController.h; sourceTree = "<group>"; };
+		81F0C95220A3D896001986C7 /* SPBlockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPBlockViewController.m; sourceTree = "<group>"; };
+		81F0C95420A3DD1D001986C7 /* SPTwoBlockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPTwoBlockViewController.h; sourceTree = "<group>"; };
+		81F0C95520A3DD1D001986C7 /* SPTwoBlockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPTwoBlockViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +102,9 @@
 		810CE74B2091C867008F84CC /* imgs */ = {
 			isa = PBXGroup;
 			children = (
+				81319CC620B8FE1C00EAC32F /* timg.jpg */,
 				810CE74C2091C8C7008F84CC /* left_btn.png */,
+				81CA14C2209AB4DB003853B5 /* pause_btn.png */,
 			);
 			path = imgs;
 			sourceTree = "<group>";
@@ -120,20 +132,17 @@
 		813B01C0208990C500D57FF2 /* testDemo */ = {
 			isa = PBXGroup;
 			children = (
+				81F0C95020A3D857001986C7 /* Controller */,
 				810CE74B2091C867008F84CC /* imgs */,
 				813B01FC2089921700D57FF2 /* Tools */,
 				813B01C1208990C500D57FF2 /* AppDelegate.h */,
 				813B01C2208990C500D57FF2 /* AppDelegate.m */,
-				813B01C4208990C500D57FF2 /* ViewController.h */,
-				813B01C5208990C500D57FF2 /* ViewController.m */,
 				813B01C7208990C500D57FF2 /* Main.storyboard */,
 				813B01CD208990C700D57FF2 /* Assets.xcassets */,
 				813B01CF208990C700D57FF2 /* LaunchScreen.storyboard */,
 				813B01D2208990C700D57FF2 /* Info.plist */,
 				813B01D3208990C700D57FF2 /* main.m */,
 				813B01CA208990C500D57FF2 /* testDemo.xcdatamodeld */,
-				813B01F92089915200D57FF2 /* SPButtonViewController.h */,
-				813B01FA2089915200D57FF2 /* SPButtonViewController.m */,
 			);
 			path = testDemo;
 			sourceTree = "<group>";
@@ -164,6 +173,21 @@
 				810CE74A2091AC95008F84CC /* PrefixHeader.pch */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		81F0C95020A3D857001986C7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				813B01F92089915200D57FF2 /* SPButtonViewController.h */,
+				813B01FA2089915200D57FF2 /* SPButtonViewController.m */,
+				81F0C95120A3D896001986C7 /* SPBlockViewController.h */,
+				81F0C95220A3D896001986C7 /* SPBlockViewController.m */,
+				81F0C95420A3DD1D001986C7 /* SPTwoBlockViewController.h */,
+				81F0C95520A3DD1D001986C7 /* SPTwoBlockViewController.m */,
+				81319CC820B90D6700EAC32F /* SPViewController.h */,
+				81319CC920B90D6700EAC32F /* SPViewController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,8 +294,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				813B01D1208990C700D57FF2 /* LaunchScreen.storyboard in Resources */,
+				81CA14C3209AB4DB003853B5 /* pause_btn.png in Resources */,
 				813B01CE208990C700D57FF2 /* Assets.xcassets in Resources */,
 				813B01C9208990C500D57FF2 /* Main.storyboard in Resources */,
+				81319CC720B8FE1C00EAC32F /* timg.jpg in Resources */,
 				810CE74D2091C8C7008F84CC /* left_btn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,12 +323,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				813B01C6208990C500D57FF2 /* ViewController.m in Sources */,
+				81F0C95620A3DD1D001986C7 /* SPTwoBlockViewController.m in Sources */,
 				813B01C3208990C500D57FF2 /* AppDelegate.m in Sources */,
 				813B01FB2089915200D57FF2 /* SPButtonViewController.m in Sources */,
 				813B01D4208990C700D57FF2 /* main.m in Sources */,
+				81F0C95320A3D896001986C7 /* SPBlockViewController.m in Sources */,
 				813B01CC208990C500D57FF2 /* testDemo.xcdatamodeld in Sources */,
 				813B01FF208993C300D57FF2 /* utilityDrawViewHelper.m in Sources */,
+				81319CCA20B90D6700EAC32F /* SPViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

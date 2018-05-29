@@ -10,11 +10,6 @@
 //#import "Utilities.h"
 
 @implementation utilityDrawViewHelper
-+ (CGSize)getTheSizeWithString:(NSString *)str
-                      fontSize:(CGFloat)fontSize
-                       maxSize:(CGSize)maxSize{
-    return [utilityDrawViewHelper getTheSizeWithString:str font:[UIFont systemFontOfSize:fontSize] maxSize:maxSize];
-}
 
 + (CGSize)getTheSizeWithString:(NSString *)str
                           font:(UIFont *)font
@@ -70,27 +65,9 @@
 #pragma mark -----------------------------
 #pragma mark UIlabel辅助添加方法
 @implementation utilityDrawViewHelper (UILabelHelper)
-//1增加背景色,nil为透明
-+ (UILabel *)addLabelInView:(UIView *)view frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor
-{
-    return [utilityDrawViewHelper addLabelInView:view Frame:rect text:text font:font textColor:color backgroundColor:backColor tag:0 alignment:NSTextAlignmentLeft numberOfLine:1];
-}
 
-//2增加tag值,为空时传0
-+ (UILabel *)addLabelInView:(UIView *)view frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag
-{
-    return [utilityDrawViewHelper addLabelInView:view Frame:rect text:text font:font textColor:color backgroundColor:backColor tag:tag alignment:NSTextAlignmentLeft numberOfLine:1];
-}
-
-//3增加aligenment
-+ (UILabel *)addLabelInView:(UIView *)view Frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag alignment:(NSTextAlignment)alignment
-{
-    return [utilityDrawViewHelper addLabelInView:view Frame:rect text:text font:font textColor:color backgroundColor:backColor tag:tag alignment:alignment numberOfLine:1];
-}
-
-
-//4自定义全部参数
-+ (UILabel *)addLabelInView:(UIView *)view Frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag alignment:(NSTextAlignment)alignment numberOfLine:(NSInteger)numbers
+//自定义全部参数
++ (UILabel *)labelWithFrame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag alignment:(NSTextAlignment)alignment numberOfLine:(NSInteger)numbers superView:(UIView *)superView
 {
     UILabel * label = nil;
     
@@ -122,62 +99,12 @@
     [label setTextAlignment:alignment];
     [label setNumberOfLines:numbers];
     [label setLineBreakMode:NSLineBreakByTruncatingTail];
-    [view addSubview:label];
+    [superView addSubview:label];
     
     return label;
 }
-
-+ (UILabel *)addLabelInView:(UIView *)view Frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag alignment:(NSTextAlignment)alignment numberOfLine:(NSInteger)numbers subText:(NSString *)subText subTextColor:(UIColor *)subColor subTextFont:(UIFont *)subFont {
-    
-    UILabel * label = nil;
-    
-    if (CGRectIsNull(rect)) {
-        label = [[UILabel alloc] init];
-    }else{
-        label = [[UILabel alloc] initWithFrame:rect];
-    }
-    
-    [label setText:text];
-    [label setFont:font];
-    
-    if (!(tag==0 || tag<0 ||!tag))
-    {
-        [label setTag:tag];
-    }
-    
-    [label setTextColor:color];
-    
-    //统一iOS不同版本下的背景色
-    if (backColor)
-    {
-        [label setBackgroundColor:backColor];
-    }else
-    {
-        [label setBackgroundColor:[UIColor clearColor]];
-    }
-    
-    [label setTextAlignment:alignment];
-    [label setNumberOfLines:numbers];
-    [label setLineBreakMode:NSLineBreakByTruncatingTail];
-    
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:text];
-//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    if (subText && ![subText isEqualToString:@""]) {
-        NSRange range = [text rangeOfString:subText];
-        if (range.location != NSNotFound) {
-            NSDictionary *attributedDic = @{NSForegroundColorAttributeName:subColor, NSFontAttributeName:subFont};
-            [attributedString addAttributes:attributedDic range:range];
-        }
-    }
-    label.attributedText = attributedString;
-    
-    [view addSubview:label];
-    
-    return label;
-    
-}
-
-+ (UILabel *)addLabelInView:(UIView *)view Frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag alignment:(NSTextAlignment)alignment numberOfLine:(NSInteger)numbers lineSpace:(CGFloat)lineSpace {
+//label:定义中间的间距lineSpace
++ (UILabel *)labelWithFrame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag alignment:(NSTextAlignment)alignment numberOfLine:(NSInteger)numbers lineSpace:(CGFloat)lineSpace superView:(UIView *)superView {
     UILabel * label = nil;
     
     if (CGRectIsNull(rect)) {
@@ -218,12 +145,15 @@
 //    [attributedString addAttribute:NSBackgroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(50, 20)];
     label.attributedText = attributedString;
     
-    [view addSubview:label];
+    [superView addSubview:label];
     
     return label;
 }
 
-+ (UILabel *)addLabelInView:(UIView *)view Frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag {
+//单行label，两端对齐
++ (UILabel *)labelWithFrame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag superView:(UIView *)superView {
+    
+    
     UILabel * label = nil;
     
     if (CGRectIsNull(rect)) {
@@ -253,17 +183,45 @@
     
     [label setLineBreakMode:NSLineBreakByTruncatingTail];
     
-    CGSize textSize = [self getTheSizeWithString:text font:font maxSize:CGSizeMake(rect.size.width, rect.size.height)];
+    if (text.length > 0) {
+        CGSize textSize = [self getTheSizeWithString:text font:font maxSize:CGSizeMake(rect.size.width, rect.size.height)];
+        
+        CGFloat margin = (rect.size.width - textSize.width) / (text.length - 1);
+        NSNumber *number = [NSNumber numberWithFloat:margin];
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:text];
+        [attributeString addAttribute:(id)kCTKernAttributeName value:number range:NSMakeRange(0, text.length - 1)];
+        
+        label.attributedText = attributeString;
+    }
     
-    CGFloat margin = (rect.size.width - textSize.width) / (text.length - 1);
-    NSNumber *number = [NSNumber numberWithFloat:margin];
-    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:text];
-    [attributeString addAttribute:(id)kCTKernAttributeName value:number range:NSMakeRange(0, text.length - 1)];
+    [superView addSubview:label];
     
-    label.attributedText = attributeString;
-    
-    [view addSubview:label];
-    
+    return label;
+}
+////添加富文本label，attributed：NSDictionary [subText:[textColor:textFont]]
++ (UILabel *)attributedlabelWithFrame:(CGRect)frame
+                                 Text:(NSString *)text
+                            Alignment:(NSTextAlignment *)alignment
+                                 Font:(UIFont *)font
+                                Color:(UIColor *)color
+                              LineNum:(NSInteger)lineNum
+                            superView:(UIView *)superView
+                    subTextAttributed:(NSDictionary *)attributed {
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.textAlignment = *(alignment);
+    label.font = font;
+    label.numberOfLines = lineNum;
+    label.backgroundColor = [UIColor clearColor];
+    NSMutableAttributedString * attString = [[NSMutableAttributedString alloc]initWithString:text];
+    for (NSString *subText in attributed.allKeys) {
+        NSDictionary *dic = [attributed objectForKey:subText];
+        NSRange range = [text rangeOfString:subText];
+        UIColor *textColor = [dic.allKeys objectAtIndex:0];
+        [attString addAttribute:NSForegroundColorAttributeName value:textColor range:range];
+        UIFont *font = [dic.allValues objectAtIndex:0];
+        [attString addAttribute:NSFontAttributeName value:font range:range];
+    }
+    label.attributedText = attString;
     return label;
 }
 
@@ -311,16 +269,11 @@
 
 
 @implementation utilityDrawViewHelper (UIButtonHelper)
-//1增加背景色,nil为透明
-+ (UIButton *)addButtonInView:(UIView *)view frame:(CGRect)rect title:(NSString *)title font:(UIFont *)font titleColor:(UIColor *)color backgroundColor:(UIColor *)backColor
-{
-    return [utilityDrawViewHelper addButtonInView:view frame:rect title:title font:font titleColor:color backgroundColor:backColor tag:0];
-}
 
-
-//2自定义全部参数
-+ (UIButton *)addButtonInView:(UIView *)view frame:(CGRect)rect title:(NSString *)title font:(UIFont *)font titleColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag
+//添加事件
++ (UIButton *)buttonWithframe:(CGRect)rect title:(NSString *)title font:(UIFont *)font titleColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents superView:(UIView *)superView
 {
+    
     UIButton *button = [[UIButton alloc] initWithFrame:rect];
     [button setTitle:title forState:UIControlStateNormal];
     [button.titleLabel setFont:font];
@@ -330,21 +283,13 @@
     if (!(tag==0 || tag<0 ||!tag)) {
         [button setTag:tag];
     }
-    [view addSubview:button];
-    
-    return button;
-}
-
-//3添加事件
-+ (UIButton *)addButtonInView:(UIView *)view frame:(CGRect)rect title:(NSString *)title font:(UIFont *)font titleColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents
-{
-    UIButton *button = [utilityDrawViewHelper addButtonInView:view frame:rect title:title font:font titleColor:color backgroundColor:backColor tag:tag];
+    [superView addSubview:button];
     [button addTarget:target action:action forControlEvents:controlEvents];
     return button;
 }
-//4加边框参数
-+ (UIButton *)addButtonInView:(UIView *)view frame:(CGRect)rect title:(NSString *)title font:(UIFont *)font titleColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents borderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius {
-    UIButton *button = [utilityDrawViewHelper addButtonInView:view frame:rect title:title font:font titleColor:color backgroundColor:backColor tag:tag];
+//加边框参数
++ (UIButton *)buttonWithFrame:(CGRect)rect title:(NSString *)title font:(UIFont *)font titleColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents borderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius superView:(UIView *)superView {
+    UIButton *button = [utilityDrawViewHelper buttonWithFrame:rect title:title font:font titleColor:color backgroundColor:backColor tag:tag addTarget:target action:action forControlEvents:controlEvents superView:superView];
     
     if (borderWidth > 0) {
         button.layer.borderWidth = borderWidth;
@@ -410,48 +355,3 @@
 
 @end
 
-
-
-
-//可以设定label内容位置的自定义label
-@implementation SouFunESFEdgeLabel //下面三个方法用来初始化edgeInsets
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    if(self = [super initWithFrame:frame])
-    {
-        self.edgeInsets = UIEdgeInsetsMake(4, 10, 4, 10);
-    }
-    return self;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        self.edgeInsets = UIEdgeInsetsMake(4, 10, 4, 10);
-    }
-    return self;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    self.edgeInsets = UIEdgeInsetsMake(4, 10, 4, 10);
-}
-
-// 修改绘制文字的区域，edgeInsets增加bounds
-- (CGRect)textRectForBounds:(CGRect)bounds limitedToNumberOfLines:(NSInteger)numberOfLines {
-    /* 调用父类该方法 注意传入的UIEdgeInsetsInsetRect(bounds, self.edgeInsets),bounds是真正的绘图区域 */
-    CGRect rect = [super textRectForBounds:UIEdgeInsetsInsetRect(bounds, self.edgeInsets) limitedToNumberOfLines:numberOfLines];
-    
-    //根据edgeInsets，修改绘制文字的bounds
-    rect.origin.x -= self.edgeInsets.left;
-    rect.origin.y -= self.edgeInsets.top;
-    rect.size.width += self.edgeInsets.left + self.edgeInsets.right;
-    rect.size.height += self.edgeInsets.top + self.edgeInsets.bottom;
-    return rect;
-}
-
-//绘制文字
-- (void)drawTextInRect:(CGRect)rect {
-    //令绘制区域为原始区域，增加的内边距区域不绘制
-    [super drawTextInRect:UIEdgeInsetsInsetRect(rect, self.edgeInsets)];
-}
-@end

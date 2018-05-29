@@ -18,10 +18,6 @@
 #define iphoneBottomSpace ((iPhoneX) ? 34.0 : 0.0)
 
 @interface utilityDrawViewHelper : NSObject
-/*
- *返回实际范围,maxSize传CGSizeZero
- */
-+ (CGSize)getTheSizeWithString:(NSString *)str fontSize:(CGFloat)fontSize maxSize:(CGSize)maxSize;
 
 /*
  *返回实际范围,maxSize传CGSizeZero
@@ -44,34 +40,6 @@
 #pragma mark UIlabel辅助添加方法
 @interface utilityDrawViewHelper (UILabelHelper)
 /**
- *1;
- *基础参数;
- *frame为空时传CGRectNul;
- *背景色nil时,为透明;
- */
-+ (UILabel *)addLabelInView:(UIView *)view frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor;
-
-/**
- *2;
- *基础参数+tag;
- *frame为空时传CGRectNul;
- *背景色nil时,为透明;
- *tag值,默认需传0;
- */
-+ (UILabel *)addLabelInView:(UIView *)view frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag;
-
-/**
- *3;
- *基础参数+tag+alignment;
- *frame为空时传CGRectNul;
- *背景色nil时,为透明;
- *tag值,默认需传0;
- *alignment,默认需传NSTextAlignmentLeft(即0);
- */
-+ (UILabel *)addLabelInView:(UIView *)view Frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag alignment:(NSTextAlignment)alignment;
-
-/**
- *4;
  *基础参数+tag+alignment+numberofline;
  *frame为空时传CGRectNul;
  *背景色nil时,为透明;
@@ -79,23 +47,9 @@
  *alignment,默认需传NSTextAlignmentLeft(即0);
  *numberOfLine,默认需传1(即单行);
  */
-+ (UILabel *)addLabelInView:(UIView *)view Frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag alignment:(NSTextAlignment)alignment numberOfLine:(NSInteger)numbers;
-/**
- *5;
- *基础参数+tag+alignment+numberofline+subText+subTextColor+subTextFont+lineSpace;
- *frame为空时传CGRectNul;
- *背景色nil时,为透明;
- *tag值,默认需传0;
- *alignment,默认需传NSTextAlignmentLeft(即0);
- *numberOfLine,默认需传1(即单行);
- *subText,选中文字;
- *subTextColor,选中文字颜色;
- *subTextFont,选中文字字体;
- */
-+ (UILabel *)addLabelInView:(UIView *)view Frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag alignment:(NSTextAlignment)alignment numberOfLine:(NSInteger)numbers subText:(NSString *)subText subTextColor:(UIColor *)subColor subTextFont:(UIFont *)subFont;
++ (UILabel *)labelWithFrame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag alignment:(NSTextAlignment)alignment numberOfLine:(NSInteger)numbers superView:(UIView *)superView;
 
 /**
- *6;
  *基础参数+tag+alignment+numberofline+lineSpace;
  *frame为空时传CGRectNul;
  *背景色nil时,为透明;
@@ -104,16 +58,26 @@
  *numberOfLine,默认需传1(即单行);
  *lineSpace,行间距
  */
-+ (UILabel *)addLabelInView:(UIView *)view Frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag alignment:(NSTextAlignment)alignment numberOfLine:(NSInteger)numbers lineSpace:(CGFloat)lineSpace;
++ (UILabel *)labelWithFrame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag alignment:(NSTextAlignment)alignment numberOfLine:(NSInteger)numbers lineSpace:(CGFloat)lineSpace superView:(UIView *)superView;
 /**
- *6;
+ * attributeLabel:
+ *
+ */
+
+/**
  *基础参数+tag+numberofline 单行label两端对齐;
  *frame为空时传CGRectNul;
  *背景色nil时,为透明;
  *tag值,默认需传0;
  *
  */
-+ (UILabel *)addLabelInView:(UIView *)view Frame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag;
++ (UILabel *)labelWithFrame:(CGRect)rect text:(NSString *)text font:(UIFont *)font textColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag superView:(UIView *)superView;
+
+/**
+ 基础参数，subtext的参数 添加富文本label，attributed：NSDictionary [subText:[textColor:textFont]]
+ */
++ (UILabel *)attributedlabelWithFrame:(CGRect)frame Text:(NSString *)text Alignment:(NSTextAlignment *)alignment Font:(UIFont *)font Color:(UIColor *)color LineNum:(NSInteger)lineNum superView:(UIView *)superView subTextAttributed:(NSDictionary *)attributed;
+
 
 @end
 
@@ -147,34 +111,14 @@
 @interface utilityDrawViewHelper (UIButtonHelper)
 
 /**
- *1;
- *基础参数;
- *frame为空时传CGRectNul;
- *背景色nil时,为透明;
- */
-+ (UIButton *)addButtonInView:(UIView *)view frame:(CGRect)rect title:(NSString *)title font:(UIFont *)font titleColor:(UIColor *)color backgroundColor:(UIColor *)backColor;
-
-
-/**
- *2;
- *基础参数+tag;
- *frame为空时传CGRectNul;
- *背景色nil时,为透明;
- *tag值,默认需传0;
- */
-+ (UIButton *)addButtonInView:(UIView *)view frame:(CGRect)rect title:(NSString *)title font:(UIFont *)font titleColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag;
-
-/**
- *3;
  *基础参数+tag+事件;
  *frame为空时传CGRectNul;
  *背景色nil时,为透明;
  *tag值,默认需传0;
  */
-+ (UIButton *)addButtonInView:(UIView *)view frame:(CGRect)rect title:(NSString *)title font:(UIFont *)font titleColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
++ (UIButton *)buttonWithFrame:(CGRect)rect title:(NSString *)title font:(UIFont *)font titleColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents superView:(UIView *)superView;
 
 /**
- *3;
  *基础参数+tag+事件+borderColor+borderWidth+cornerRadius;
  *frame为空时传CGRectNul;
  *背景色nil时,为透明;
@@ -183,7 +127,7 @@
  *borderWidth，边框宽度
  *cornerRadius，圆角
  */
-+ (UIButton *)addButtonInView:(UIView *)view frame:(CGRect)rect title:(NSString *)title font:(UIFont *)font titleColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents borderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius;
++ (UIButton *)buttonWithFrame:(CGRect)rect title:(NSString *)title font:(UIFont *)font titleColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents borderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius superView:(UIView *)superView;
 
 @end
 
@@ -220,11 +164,4 @@
  */
 + (UIButton *)addAdaptButtonInView:(UIView *)view fromPoint:(CGPoint)point fromeLeftToRight:(BOOL)forward buttonRect:(CGRect *)rect title:(NSString *)title font:(UIFont *)font titleColor:(UIColor *)color backgroundColor:(UIColor *)backColor tag:(NSInteger)tag addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
 
-
-@end
-
-
-@interface SouFunESFEdgeLabel : UILabel
-// 用来决定上下左右内边距，也可以提供一个接口供外部修改，在这里就先固定写死
-@property (assign, nonatomic) UIEdgeInsets edgeInsets;
 @end
